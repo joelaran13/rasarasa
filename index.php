@@ -1,93 +1,9 @@
-<?php
-// -------------------------------------------------------------------------
-// 1. CONFIGURATION & DATA (The "Backend")
-// -------------------------------------------------------------------------
-
-// Business Info
-$siteTitle = "Rasa Rasa Sibu - Taste the Comfort";
-$brandName = "Rasa Rasa";
-$address = "Jalan Dr Wong Soon Kai, 96000 Sibu, Sarawak";
-$phone = "+60 84-320 420"; // Placeholder
-$mapsLink = "https://www.google.com/maps/place/Rasa+Rasa/@2.3430626,111.8392346,17.83z";
-
-// Opening Hours
-$hours = [
-    "Weekdays" => "10:00 AM - 8:00 PM",
-    "Weekends" => "10:00 AM - 7:30 PM"
-];
-
-// Menu Data (Organized by Category)
-$menu = [
-    "Signatures" => [
-        [
-            "name" => "Creamy Butter Milk Chicken Fried Rice",
-            "price" => "RM 14.90",
-            "desc" => "Rich, creamy, savory, and just the right amount of indulgent. A crowd favorite.",
-            "is_hot" => true
-        ],
-        [
-            "name" => "Nasi Lemak Ayam Berempah",
-            "price" => "RM 19.90",
-            "desc" => "Fragrant coconut rice served with spiced fried chicken, sambal, peanuts, and cucumber.",
-            "is_hot" => true
-        ],
-        [
-            "name" => "Fried Chicken Skin",
-            "price" => "RM 12.00",
-            "desc" => "Crunchy, golden brown snack. Irresistibly savory and addictive.",
-            "is_hot" => false
-        ]
-    ],
-    "Western Fusion" => [
-        [
-            "name" => "Chicken Chop Salted Egg Sauce",
-            "price" => "RM 21.90",
-            "desc" => "Crispy chicken chop smothered in luscious, creamy salted egg yolk sauce.",
-            "is_hot" => true
-        ],
-        [
-            "name" => "Aglio Olio Ayam Madu",
-            "price" => "RM 22.90",
-            "desc" => "Spaghetti tossed in garlic oil, topped with honey-glazed grilled chicken.",
-            "is_hot" => false
-        ],
-        [
-            "name" => "Fish & Chips",
-            "price" => "RM 23.90",
-            "desc" => "Crispy battered fish fillets served with fries and tartar sauce.",
-            "is_hot" => false
-        ]
-    ],
-    "Local Delights" => [
-        [
-            "name" => "Nasi Ayam Penyet",
-            "price" => "RM 12.90",
-            "desc" => "Smashed fried chicken served with white rice, spicy sambal, tofu, and tempeh.",
-            "is_hot" => true
-        ],
-        [
-            "name" => "Nasi Goreng Ubi + Ayam",
-            "price" => "RM 16.90",
-            "desc" => "Unique sweet potato fried rice paired with crispy fried chicken.",
-            "is_hot" => false
-        ]
-    ]
-];
-
-// Form Handling Logic (Simple Simulation)
-$messageSent = false;
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // In a real app, you would validate inputs and send an email/save to DB here.
-    $name = htmlspecialchars($_POST['name'] ?? '');
-    $messageSent = true;
-}
-?>
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $siteTitle; ?></title>
+    <title>Rasa Rasa Sibu - Taste the Comfort</title>
     
     <!-- SEO Meta -->
     <meta name="description" content="Rasa Rasa Sibu - Serving authentic local delights and western fusion. Try our famous Butter Milk Chicken Fried Rice!">
@@ -119,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xl group-hover:bg-orange-600 transition-colors">
                     R
                 </div>
-                <span class="text-2xl font-bold tracking-tight text-gray-900"><?php echo $brandName; ?></span>
+                <span class="text-2xl font-bold tracking-tight text-gray-900">Rasa Rasa</span>
             </a>
 
             <!-- Desktop Menu -->
@@ -128,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <a href="#about" class="font-medium text-gray-600 hover:text-orange-500 transition-colors">About</a>
                 <a href="#menu" class="font-medium text-gray-600 hover:text-orange-500 transition-colors">Menu</a>
                 <a href="#location" class="font-medium text-gray-600 hover:text-orange-500 transition-colors">Location</a>
-                <a href="tel:<?php echo str_replace(' ', '', $phone); ?>" class="px-5 py-2 bg-gray-900 hover:bg-orange-500 text-white rounded-full font-semibold transition-all">
+                <a href="tel:+6084-320420" class="px-5 py-2 bg-gray-900 hover:bg-orange-500 text-white rounded-full font-semibold transition-all">
                     Call Us
                 </a>
             </div>
@@ -211,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </section>
 
-    <!-- Menu Section (PHP Generated) -->
+    <!-- Menu Section (HTML) -->
     <section id="menu" class="py-24 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
@@ -221,45 +137,167 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <?php foreach ($menu as $category => $items): ?>
-                    <!-- Category Column -->
-                    <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow h-full">
-                        <div class="flex items-center gap-3 mb-8 pb-4 border-b border-gray-100">
-                            <?php 
-                            $icon = 'utensils';
-                            if($category == 'Signatures') $icon = 'flame';
-                            if($category == 'Western Fusion') $icon = 'globe'; 
-                            ?>
-                            <div class="p-2 bg-orange-100 rounded-lg text-orange-600">
-                                <i data-lucide="<?php echo $icon; ?>" class="w-6 h-6"></i>
+                
+                <!-- Signatures -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow h-full">
+                    <div class="flex items-center gap-3 mb-8 pb-4 border-b border-gray-100">
+                        <div class="p-2 bg-orange-100 rounded-lg text-orange-600">
+                            <i data-lucide="flame" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">Signatures</h3>
+                    </div>
+
+                    <div class="space-y-8">
+                        <div class="group">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <h4 class="font-bold text-gray-900 text-lg group-hover:text-orange-600 transition-colors">
+                                            Creamy Butter Milk Chicken Fried Rice
+                                        </h4>
+                                        <span class="bg-red-50 text-red-600 text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wide border border-red-100">
+                                            Hot
+                                        </span>
+                                    </div>
+                                </div>
+                                <span class="font-bold text-orange-600 whitespace-nowrap">RM 14.90</span>
                             </div>
-                            <h3 class="text-2xl font-bold text-gray-800"><?php echo $category; ?></h3>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-3">Rich, creamy, savory, and just the right amount of indulgent. A crowd favorite.</p>
                         </div>
 
-                        <div class="space-y-8">
-                            <?php foreach ($items as $item): ?>
-                            <div class="group">
-                                <div class="flex justify-between items-start mb-2">
-                                    <div>
-                                        <div class="flex items-center gap-2">
-                                            <h4 class="font-bold text-gray-900 text-lg group-hover:text-orange-600 transition-colors">
-                                                <?php echo $item['name']; ?>
-                                            </h4>
-                                            <?php if ($item['is_hot']): ?>
-                                                <span class="bg-red-50 text-red-600 text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wide border border-red-100">
-                                                    Hot
-                                                </span>
-                                            <?php endif; ?>
-                                        </div>
+                        <div class="group">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <h4 class="font-bold text-gray-900 text-lg group-hover:text-orange-600 transition-colors">
+                                            Nasi Lemak Ayam Berempah
+                                        </h4>
+                                        <span class="bg-red-50 text-red-600 text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wide border border-red-100">
+                                            Hot
+                                        </span>
                                     </div>
-                                    <span class="font-bold text-orange-600 whitespace-nowrap"><?php echo $item['price']; ?></span>
                                 </div>
-                                <p class="text-gray-500 text-sm leading-relaxed mb-3"><?php echo $item['desc']; ?></p>
+                                <span class="font-bold text-orange-600 whitespace-nowrap">RM 19.90</span>
                             </div>
-                            <?php endforeach; ?>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-3">Fragrant coconut rice served with spiced fried chicken, sambal, peanuts, and cucumber.</p>
+                        </div>
+
+                        <div class="group">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <h4 class="font-bold text-gray-900 text-lg group-hover:text-orange-600 transition-colors">
+                                            Fried Chicken Skin
+                                        </h4>
+                                    </div>
+                                </div>
+                                <span class="font-bold text-orange-600 whitespace-nowrap">RM 12.00</span>
+                            </div>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-3">Crunchy, golden brown snack. Irresistibly savory and addictive.</p>
                         </div>
                     </div>
-                <?php endforeach; ?>
+                </div>
+
+                <!-- Western Fusion -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow h-full">
+                    <div class="flex items-center gap-3 mb-8 pb-4 border-b border-gray-100">
+                        <div class="p-2 bg-orange-100 rounded-lg text-orange-600">
+                            <i data-lucide="globe" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">Western Fusion</h3>
+                    </div>
+
+                    <div class="space-y-8">
+                        <div class="group">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <h4 class="font-bold text-gray-900 text-lg group-hover:text-orange-600 transition-colors">
+                                            Chicken Chop Salted Egg Sauce
+                                        </h4>
+                                        <span class="bg-red-50 text-red-600 text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wide border border-red-100">
+                                            Hot
+                                        </span>
+                                    </div>
+                                </div>
+                                <span class="font-bold text-orange-600 whitespace-nowrap">RM 21.90</span>
+                            </div>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-3">Crispy chicken chop smothered in luscious, creamy salted egg yolk sauce.</p>
+                        </div>
+
+                        <div class="group">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <h4 class="font-bold text-gray-900 text-lg group-hover:text-orange-600 transition-colors">
+                                            Aglio Olio Ayam Madu
+                                        </h4>
+                                    </div>
+                                </div>
+                                <span class="font-bold text-orange-600 whitespace-nowrap">RM 22.90</span>
+                            </div>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-3">Spaghetti tossed in garlic oil, topped with honey-glazed grilled chicken.</p>
+                        </div>
+
+                        <div class="group">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <h4 class="font-bold text-gray-900 text-lg group-hover:text-orange-600 transition-colors">
+                                            Fish & Chips
+                                        </h4>
+                                    </div>
+                                </div>
+                                <span class="font-bold text-orange-600 whitespace-nowrap">RM 23.90</span>
+                            </div>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-3">Crispy battered fish fillets served with fries and tartar sauce.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Local Delights -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow h-full">
+                    <div class="flex items-center gap-3 mb-8 pb-4 border-b border-gray-100">
+                        <div class="p-2 bg-orange-100 rounded-lg text-orange-600">
+                            <i data-lucide="utensils" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800">Local Delights</h3>
+                    </div>
+
+                    <div class="space-y-8">
+                        <div class="group">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <h4 class="font-bold text-gray-900 text-lg group-hover:text-orange-600 transition-colors">
+                                            Nasi Ayam Penyet
+                                        </h4>
+                                        <span class="bg-red-50 text-red-600 text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wide border border-red-100">
+                                            Hot
+                                        </span>
+                                    </div>
+                                </div>
+                                <span class="font-bold text-orange-600 whitespace-nowrap">RM 12.90</span>
+                            </div>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-3">Smashed fried chicken served with white rice, spicy sambal, tofu, and tempeh.</p>
+                        </div>
+
+                        <div class="group">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <h4 class="font-bold text-gray-900 text-lg group-hover:text-orange-600 transition-colors">
+                                            Nasi Goreng Ubi + Ayam
+                                        </h4>
+                                    </div>
+                                </div>
+                                <span class="font-bold text-orange-600 whitespace-nowrap">RM 16.90</span>
+                            </div>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-3">Unique sweet potato fried rice paired with crispy fried chicken.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             
             <div class="mt-12 text-center">
@@ -289,7 +327,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <span class="text-orange-500 font-bold tracking-wider uppercase text-sm">About Us</span>
                     <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-8">Simple Food, <br/>Big Flavors</h2>
                     <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                        Located in the heart of Sibu, <strong><?php echo $brandName; ?></strong> brings you a culinary experience that feels like home. We believe that good food shouldn't be complicated—it should just be delicious.
+                        Located in the heart of Sibu, <strong>Rasa Rasa</strong> brings you a culinary experience that feels like home. We believe that good food shouldn't be complicated—it should just be delicious.
                     </p>
                     <p class="text-gray-600 text-lg leading-relaxed mb-8">
                         Whether you're craving the spicy kick of our signature Nasi Lemak, the comforting creaminess of our Butter Chicken, or a hearty Western plate, our kitchen prepares every dish with passion and fresh ingredients.
@@ -331,8 +369,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
                             <div>
                                 <h3 class="text-lg font-bold mb-1">Our Address</h3>
-                                <p class="text-gray-400 mb-2"><?php echo $address; ?></p>
-                                <a href="<?php echo $mapsLink; ?>" target="_blank" class="text-orange-400 text-sm font-semibold hover:underline flex items-center gap-1">
+                                <p class="text-gray-400 mb-2">Jalan Dr Wong Soon Kai, 96000 Sibu, Sarawak</p>
+                                <a href="https://www.google.com/maps/place/Rasa+Rasa/@2.3430626,111.8392346,17.83z" target="_blank" class="text-orange-400 text-sm font-semibold hover:underline flex items-center gap-1">
                                     Get Directions <i data-lucide="external-link" class="w-3 h-3"></i>
                                 </a>
                             </div>
@@ -344,8 +382,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
                             <div>
                                 <h3 class="text-lg font-bold mb-1">Opening Hours</h3>
-                                <p class="text-gray-400">Weekdays: <?php echo $hours['Weekdays']; ?></p>
-                                <p class="text-gray-400">Weekends: <?php echo $hours['Weekends']; ?></p>
+                                <p class="text-gray-400">Weekdays: 10:00 AM - 8:00 PM</p>
+                                <p class="text-gray-400">Weekends: 10:00 AM - 7:30 PM</p>
                             </div>
                         </div>
 
@@ -356,7 +394,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div>
                                 <h3 class="text-lg font-bold mb-1">Contact</h3>
                                 <p class="text-gray-400 mb-1">Reservations & Takeaway</p>
-                                <a href="tel:<?php echo $phone; ?>" class="text-2xl font-bold text-white hover:text-orange-400 transition-colors"><?php echo $phone; ?></a>
+                                <a href="tel:+6084-320420" class="text-2xl font-bold text-white hover:text-orange-400 transition-colors">+60 84-320 420</a>
                             </div>
                         </div>
                     </div>
@@ -364,17 +402,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <!-- Contact Form / Map Box -->
                 <div class="bg-white rounded-3xl p-8 text-gray-900 shadow-xl">
-                    <?php if($messageSent): ?>
-                        <div class="h-full flex flex-col items-center justify-center text-center py-10">
-                            <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-6">
-                                <i data-lucide="check" class="w-10 h-10"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold mb-2">Message Sent!</h3>
-                            <p class="text-gray-600">Thanks for contacting us, <?php echo $name; ?>. We'll get back to you shortly.</p>
-                        </div>
-                    <?php else: ?>
+                    <div id="form-container">
                         <h3 class="text-2xl font-bold mb-6">Send us a message</h3>
-                        <form method="POST" action="#location" class="space-y-4">
+                        <form id="contactForm" onsubmit="event.preventDefault(); document.getElementById('form-container').classList.add('hidden'); document.getElementById('success-message').classList.remove('hidden');" class="space-y-4">
                             <div>
                                 <label class="block text-sm font-semibold text-gray-700 mb-1">Name</label>
                                 <input type="text" name="name" required class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all">
@@ -391,7 +421,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 Send Message
                             </button>
                         </form>
-                    <?php endif; ?>
+                    </div>
+
+                    <!-- Success Message (Hidden by default) -->
+                    <div id="success-message" class="hidden h-full flex flex-col items-center justify-center text-center py-10">
+                        <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-6">
+                            <i data-lucide="check" class="w-10 h-10"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Message Sent!</h3>
+                        <p class="text-gray-600">Thanks for contacting us. We'll get back to you shortly.</p>
+                        <button onclick="document.getElementById('form-container').classList.remove('hidden'); document.getElementById('success-message').classList.add('hidden');" class="mt-6 text-orange-500 font-semibold text-sm hover:underline">
+                            Send another message
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -402,10 +444,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="flex items-center gap-2">
                 <div class="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold">R</div>
-                <span class="text-xl font-bold text-white"><?php echo $brandName; ?></span>
+                <span class="text-xl font-bold text-white">Rasa Rasa</span>
             </div>
             <p class="text-sm">
-                &copy; <?php echo date("Y"); ?> <?php echo $brandName; ?>. All rights reserved.
+                &copy; 2024 Rasa Rasa. All rights reserved.
             </p>
         </div>
     </footer>
